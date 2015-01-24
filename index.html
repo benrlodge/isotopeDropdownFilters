@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>isoDropdownFilters</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="style/demo.css">
+
+    </head>
+    <body>
+    <div class='container'>
+
+
+
+    
+    <h1>isoDropdownFilters.js</h1>
+    <p>Easy to create dropdown filters using the MetaFizzy Isotope Plugin</p>
+      
+        <ul class="filtersnav">
+          <li class="filtersnav__dropdown filtersnav__dropdown-btn">
+            <span>Category: </span> All <i class="icn icn-dropdown-arrow"></i></a>
+            <ul class="filtersnav__dropdown-items">
+              <li class='filtersnav__dropdown-item'><a href="#" data-filter='*'>All</a></li>
+              <li class='filtersnav__dropdown-item'><a href="#" data-filter='hubspot'>Bacon</a></li>
+              <li class='filtersnav__dropdown-item'><a href="#" data-filter='vendors'>Chunky Bacon</a></li>
+              <li class='filtersnav__dropdown-item'><a href="#" data-filter='vendors'>Unicorns</a></li>
+            </ul>
+          </li>
+          <li class="filtersnav__dropdown filtersnav__dropdown-btn">
+            <span>Price: </span> Free <i class="icn icn-dropdown-arrow"></i></a>
+            <ul class="filtersnav__dropdown-items">
+              <li class='filtersnav__dropdown-item'><a href="#" data-filter='*'>Free</a></li>
+              <li class='filtersnav__dropdown-item'><a href="#" data-filter='sales'>All</a></li>
+            </ul>
+          </li>
+
+          <li class="filtersnav__dropdown filtersnav__dropdown-btn">
+            <span>Sort by: </span> Most Popular <i class="icn icn-dropdown-arrow"></i></a>
+            <ul class="filtersnav__dropdown-items">
+              <li class='filtersnav__dropdown-item'><a href="#" data-filter='popular'>Most Popular</a></li>
+              <li class='filtersnav__dropdown-item'><a href="#" data-filter='abc'>Alphabetical</a></li>
+            </ul>
+          </li>
+          <li class="filtersnav__dropdown filtersnav__dropdown-btn">
+            <input type='text' placeholder='Search...'>
+          </li>
+        </ul>
+
+
+    <div class='metaInfo'>
+      <p>Filtering by: <span data-filter-detail='selected'>None</span></p>
+      <p>Sorting by: <span data-filter-detail='selected'>Most Popular</span></p>
+
+    </div>
+  
+
+    <div class='item-container'>
+      <div class='item'>
+        <div class='img img1'></div>
+        
+      </div>
+      <div class='item'>
+        <div class='img img2'></div>
+        
+      </div>
+      <div class='item'>
+        <div class='img img3'></div>
+        
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+
+  </div>
+
+        
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/isotope/dist/isotope.pkgd.js"></script>
+
+    
+    <script src="js/isoMultiFilter.js"></script>
+
+    <script>
+      $(document).ready(function(){
+
+        var $container = $('.item-container')
+        $container.isotope({
+          itemSelector: '.item',
+          layoutMode: 'fitRows' 
+        }).isoMultiFilter();
+
+      })
+
+
+
+    </script>
+      
+    </body>
+</html>
