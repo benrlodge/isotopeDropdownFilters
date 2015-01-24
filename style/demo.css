@@ -28,18 +28,20 @@ cf:after{
 	padding: 0 10px;
 }
 
+
+
 .filtersnav__dropdown{
 	float: left;
-}
-.filtersnav__dropdown:hover{
-	cursor: pointer
 }
 
 .filtersnav__dropdown-item{
 	border-top: 1px solid #e8e8e8;
-	margin: 0 10px 0 0;
-	display: block;
 }
+
+.filtersnav__dropdown-item label{
+}
+
+
 .filtersnav__dropdown-item.active{
 	padding-left: 20px;
 }

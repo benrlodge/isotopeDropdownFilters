@@ -21,6 +21,9 @@
     <p>Prepackaged dropdown filters using the MetaFizzy Isotope Plugin</p>
       
       <hr>
+  
+                
+
 
       <h3>Single Category Filters (App Theme):</h3>
         <ul class="filtersnav">
@@ -28,18 +31,33 @@
             <span>Category: </span>
             <span class='selected-label'>All</span> <i class="icn icn-dropdown-arrow"></i></a>
             <ul class="filtersnav__dropdown-items">
-              <li class='filtersnav__dropdown-item'><a href="#" data-filter='*'>All</a></li>
-              <li class='filtersnav__dropdown-item'><a href="#" data-filter='bacon'>Bacon</a></li>
-              <li class='filtersnav__dropdown-item'><a href="#" data-filter='chunky-bacon'>Chunky Bacon</a></li>
-              <li class='filtersnav__dropdown-item'><a href="#" data-filter='unicorns'>Unicorns</a></li>
+              <li class='filtersnav__dropdown-item'>
+                <input id='category' class='filtersnav__filter' type='checkbox' data-filter='all'>
+                <label for='category'>All</label>
+              </li>
+
+
+              <li class='filtersnav__dropdown-item'>
+                <input id='bacon' class='filtersnav__filter' type='checkbox' data-filter='.bacon'>
+                <label for='bacon'> Thin Bacon </label>
+              </li>
+              
+              <li class='filtersnav__dropdown-item'>
+                <input id='chunkybacon' class='filtersnav__filter' type='checkbox' data-filter='.chunky-bacon'>
+                <label for='chunkybacon'> Chunky Bacon </label>
+              </li>              
             </ul>
           </li>
+
+
+
           <li class="filtersnav__dropdown filtersnav__dropdown-btn">
             <span>Price: </span> 
             <span class='selected-label'>Free</span> <i class="icn icn-dropdown-arrow"></i></a>
             <ul class="filtersnav__dropdown-items">
-              <li class='filtersnav__dropdown-item'><a href="#" data-filter='free'>Free</a></li>
-              <li class='filtersnav__dropdown-item'><a href="#" data-filter='paid'>Paid</a></li>
+              <li class='filtersnav__dropdown-item'><a class='filtersnav__filter' href="#" data-filter='all'>Any</a></li>
+              <li class='filtersnav__dropdown-item'><a class='filtersnav__filter' href="#" data-filter='.free'>Free</a></li>
+              <li class='filtersnav__dropdown-item'><a class='filtersnav__filter' href="#" data-filter='.paid'>Paid</a></li>
             </ul>
           </li>
 

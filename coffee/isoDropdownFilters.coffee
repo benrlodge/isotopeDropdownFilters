@@ -5,6 +5,8 @@ $.fn.istopeDropdownFilters = (pluginOptions) ->
 
 class istopeDropdownFilters
   defaults:
+    container: '.item-container'
+    filtersnav__filter: '.filtersnav__filter'
     filtersnav__dropdown: '.filtersnav__dropdown'
     filter__children:'.filtersnav__dropdown-items'
     filtersnav__item: '.filtersnav__dropdown-item'
@@ -12,6 +14,7 @@ class istopeDropdownFilters
 
   constructor: (@element, options) ->
     @options = $.extend({}, @defaults, options)
+    @allFilters = {}
     @events()
 
 
@@ -19,21 +22,66 @@ class istopeDropdownFilters
   sizeDropdowns: ->
 
 
+
+  setFilters: ->
+    console.log 'setting filters:'
+    console.log @activeFilters
+
+    
+    # $(selection).find(@options.filter__children).toggle()
+    # $(selection).closest('.filtersnav__dropdown')
+    #             .find(@options.selected__label).text($(selection).text())
+
+    # filterValue = $(selection).find('a').data('filter')
+
+    # # $container.isotope filter: filterValue
+    # $(@options.container).isotope({ filter: filterValue })
+
+
+
+
+
   ## Set active label and filter
   filterChange: (selection) ->
-    
-    $(selection).find(@options.filter__children).toggle()
-    $(selection).closest('.filtersnav__dropdown')
-                .find(@options.selected__label).text($(selection).text())
+   
+    @activeFilters = []
+    isActive = $(selection).hasClass('active')
+    $filter = $(selection).data('filter')
+    $parentFilter = $(selection).closest(@options.filter__children)
+    $filters = $parentFilter.find('.filtersnav__filter')
+
+    if $filter is 'all'
+            
+      if isActive
+        $(selection).removeClass('active')
+        for item in $filters
+          $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false);
+        @activeFilters = []
+
+      else
+        $(selection).addClass('active')
+        for item in $filters
+          $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', true);
+          if $(item).data('filter') isnt 'all'
+            @activeFilters.push $(item).data('filter')
+        
+      @setFilters()
+      return
+      
+    if $(selection).prop('checked')
+      $(selection).addClass('active')
+    else
+      $(selection).removeClass('active')
 
 
-    filter = $(selection).find('a').data('filter')
-    if filter is '*' then filterValue = '*' else filterValue = ".#{filter}"
+    # $(selection).addClass('active')
 
-    $container = $(".item-container")
+    for filter in $filters
+      if $(filter).hasClass('active')
+        @activeFilters.push $(filter).data('filter')
 
-    # $container.isotope filter: filterValue
-    $container.isotope({ filter: filterValue })
+      
+    @setFilters()
 
 
 
@@ -45,7 +93,7 @@ class istopeDropdownFilters
     $(@options.filtersnav__dropdown).on 'mouseenter mouseleave', ->
       $(this).find(plugin.options.filter__children).toggle()
       
-    $(@options.filtersnav__item).on 'click', ->
+    $(@options.filtersnav__filter).on 'click', ->
       plugin.filterChange(@)
       
 
