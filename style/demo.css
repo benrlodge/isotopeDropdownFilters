@@ -29,6 +29,9 @@ cf:after{
 }
 
 
+.filtersnav__dropdown-btn{
+	cursor: default;
+}
 
 .filtersnav__dropdown{
 	float: left;

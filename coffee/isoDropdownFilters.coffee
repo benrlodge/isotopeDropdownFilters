@@ -68,13 +68,19 @@ class istopeDropdownFilters
       @setFilters()
       return
       
+
+    ## check if all is selected, remove active state if so
+    for filter in $filters
+      if $(filter).attr('data-filter') is 'all' and $(filter).hasClass 'active'
+
+        $("[data-filter='all']").removeClass('active').prop('checked', false)
+      
+
     if $(selection).prop('checked')
       $(selection).addClass('active')
+    
     else
       $(selection).removeClass('active')
-
-
-    # $(selection).addClass('active')
 
     for filter in $filters
       if $(filter).hasClass('active')

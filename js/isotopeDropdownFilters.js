@@ -32,7 +32,7 @@
     };
 
     istopeDropdownFilters.prototype.filterChange = function(selection) {
-      var $filter, $filters, $parentFilter, filter, isActive, item, _i, _j, _k, _len, _len1, _len2;
+      var $filter, $filters, $parentFilter, filter, isActive, item, _i, _j, _k, _l, _len, _len1, _len2, _len3;
       this.activeFilters = [];
       isActive = $(selection).hasClass('active');
       $filter = $(selection).data('filter');
@@ -59,13 +59,19 @@
         this.setFilters();
         return;
       }
+      for (_k = 0, _len2 = $filters.length; _k < _len2; _k++) {
+        filter = $filters[_k];
+        if ($(filter).attr('data-filter') === 'all' && $(filter).hasClass('active')) {
+          $("[data-filter='all']").removeClass('active').prop('checked', false);
+        }
+      }
       if ($(selection).prop('checked')) {
         $(selection).addClass('active');
       } else {
         $(selection).removeClass('active');
       }
-      for (_k = 0, _len2 = $filters.length; _k < _len2; _k++) {
-        filter = $filters[_k];
+      for (_l = 0, _len3 = $filters.length; _l < _len3; _l++) {
+        filter = $filters[_l];
         if ($(filter).hasClass('active')) {
           this.activeFilters.push($(filter).data('filter'));
         }
