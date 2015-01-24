@@ -16,23 +16,27 @@
     };
 
     function istopeDropdownFilters(element, options) {
-      var plugin;
       this.element = element;
-      plugin = this;
-      this.options = $.extend({}, plugin.defaults, options);
-      console.log(this.options);
+      this.options = $.extend({}, this.defaults, options);
       this.events();
     }
 
-    istopeDropdownFilters.prototype.sizeDropdowns = function() {
-      return console.log('sizeDropdowns');
-    };
+    istopeDropdownFilters.prototype.sizeDropdowns = function() {};
 
     istopeDropdownFilters.prototype.filterChange = function(selection) {
-      var label;
-      label = $(selection).text();
+      var $container, filter, filterValue;
       $(selection).find(this.options.filter__children).toggle();
-      return $(selection).closest('.filtersnav__dropdown').find(this.options.selected__label).text(label);
+      $(selection).closest('.filtersnav__dropdown').find(this.options.selected__label).text($(selection).text());
+      filter = $(selection).find('a').data('filter');
+      if (filter === '*') {
+        filterValue = '*';
+      } else {
+        filterValue = "." + filter;
+      }
+      $container = $(".item-container");
+      return $container.isotope({
+        filter: filterValue
+      });
     };
 
     istopeDropdownFilters.prototype.events = function() {

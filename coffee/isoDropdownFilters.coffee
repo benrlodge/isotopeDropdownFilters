@@ -11,19 +11,32 @@ class istopeDropdownFilters
     selected__label: '.selected-label'
 
   constructor: (@element, options) ->
-    plugin = @    
-    @options = $.extend({}, plugin.defaults, options)
-    console.log @options
+    @options = $.extend({}, @defaults, options)
     @events()
 
+
+  ## Size dropdown containers to be the same width as the top level button
   sizeDropdowns: ->
-    console.log 'sizeDropdowns'
 
 
+  ## Set active label and filter
   filterChange: (selection) ->
-    label = $(selection).text()
+    
     $(selection).find(@options.filter__children).toggle()
-    $(selection).closest('.filtersnav__dropdown').find(@options.selected__label).text(label)
+    $(selection).closest('.filtersnav__dropdown')
+                .find(@options.selected__label).text($(selection).text())
+
+
+    filter = $(selection).find('a').data('filter')
+    if filter is '*' then filterValue = '*' else filterValue = ".#{filter}"
+
+    $container = $(".item-container")
+
+    # $container.isotope filter: filterValue
+    $container.isotope({ filter: filterValue })
+
+
+
 
 
   events: ->  
@@ -35,6 +48,9 @@ class istopeDropdownFilters
     $(@options.filtersnav__item).on 'click', ->
       plugin.filterChange(@)
       
+
+
+
 
 
 
