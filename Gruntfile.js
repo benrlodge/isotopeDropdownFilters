@@ -12,13 +12,13 @@ module.exports = function(grunt) {
 
     coffee: {
       compile: {
-        files: { './js/isoMultiFilter.js': './coffee/isoMultiFilter.coffee' }
+        files: { './js/isotopeDropdownFilters.js': './coffee/isoDropdownFilters.coffee' }
       }
     },
 
     watch: {
       coffee: {
-        files: ['./coffee/isoMultiFilter.coffee'], tasks: 'coffee'
+        files: ['./coffee/isoDropdownFilters.coffee'], tasks: 'coffee'
       }
     }
 

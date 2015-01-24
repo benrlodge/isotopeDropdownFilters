@@ -1,51 +1,41 @@
 
-
-$.fn.isoMultiFilter = (options) ->
-
-  defaults = 
-    itemsContainer  :   $(".item-container")
-    navContainer: $('.filtersnav')
-
-  options = $.extend(defaults, options)
-
-  filtersnav__dropdown = '.filtersnav__dropdown'
-  filter__children = '.filtersnav__dropdown-items'
-  filtersnav__item = '.filtersnav__dropdown-item'
+$.fn.istopeDropdownFilters = (pluginOptions) ->
+  @each (i, element) -> new istopeDropdownFilters($(element), pluginOptions)
 
 
-  # Filtered information
-  # detail__selected = data-filter-detail='selected'
+class istopeDropdownFilters
+  defaults:
+    filtersnav__dropdown: '.filtersnav__dropdown'
+    filter__children:'.filtersnav__dropdown-items'
+    filtersnav__item: '.filtersnav__dropdown-item'
+    selected__label: '.selected-label'
 
-  viewDetails = ->
-    ## turn into loop
-    $("[data-filter-detail='selected']").text('Yo!')
-
-
-  filterChange = () ->
-    console.log 'filter changed'
-    viewDetails()
-
-
-  events = ->
-
-    # Hover on primary navigation
-    $(filtersnav__dropdown).on 'mouseenter mouseleave', ->
-      $(this).find(filter__children).toggle()
-      
-    # Click on navigation item
-    $(filtersnav__item).on 'click', (ev) ->
-      ev.preventDefault()
-      $(this).find(filter__children).toggle()
-      filterChange()
-      
-      
-
-  init = ->
-    console.log 'init'
+  constructor: (@element, options) ->
+    plugin = @    
+    @options = $.extend({}, plugin.defaults, options)
+    console.log @options
     @events()
 
+  sizeDropdowns: ->
+    console.log 'sizeDropdowns'
 
 
-  @each ->
-    console.log 'oh fuck yea'
-    events()
+  filterChange: (selection) ->
+    label = $(selection).text()
+    $(selection).find(@options.filter__children).toggle()
+    $(selection).closest('.filtersnav__dropdown').find(@options.selected__label).text(label)
+
+
+  events: ->  
+    plugin = @
+
+    $(@options.filtersnav__dropdown).on 'mouseenter mouseleave', ->
+      $(this).find(plugin.options.filter__children).toggle()
+      
+    $(@options.filtersnav__item).on 'click', ->
+      plugin.filterChange(@)
+      
+
+
+
+
