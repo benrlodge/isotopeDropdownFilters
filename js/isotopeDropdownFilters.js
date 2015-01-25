@@ -13,7 +13,8 @@
       filtersnav__filter: '.filtersnav__filter',
       filtersnav__dropdown: '.filtersnav__dropdown',
       filter__children: '.filtersnav__dropdown-items',
-      filtersnav__item: '.filtersnav__dropdown-item'
+      filtersnav__item: '.filtersnav__dropdown-item',
+      sizeDropdowns: true
     };
 
     function istopeDropdownFilters(element, options) {
@@ -28,7 +29,9 @@
       $("[data-filter='all'").prop('checked', true);
       $(".filtersnav__filter").addClass('active');
       this.updateFilters();
-      return this.sizeDropdowns();
+      if (this.options.sizeDropdowns) {
+        return this.sizeDropdowns();
+      }
     };
 
     istopeDropdownFilters.prototype.sizeDropdowns = function() {};
@@ -50,9 +53,35 @@
           });
         });
       });
-      return $(this.options.container).isotope({
+      $(this.options.container).isotope({
         filter: allValues.join(', ')
       });
+      return this.cleanUpFilters();
+    };
+
+    istopeDropdownFilters.prototype.cleanUpFilters = function() {
+      var child, children, count, parent, parents, _i, _j, _len, _len1, _results;
+      parents = $('.filtersnav__dropdown');
+      _results = [];
+      for (_i = 0, _len = parents.length; _i < _len; _i++) {
+        parent = parents[_i];
+        count = 0;
+        children = $(parent).find('.filtersnav__filter');
+        for (_j = 0, _len1 = children.length; _j < _len1; _j++) {
+          child = children[_j];
+          if ($(child).data('filter') !== 'all') {
+            if ($(child).hasClass('active')) {
+              count++;
+            }
+          }
+        }
+        if (count === 0) {
+          _results.push($(parent).find("[data-filter='all']").addClass('active').prop('checked', true));
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
     };
 
     istopeDropdownFilters.prototype.updateFilters = function() {

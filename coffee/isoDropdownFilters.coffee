@@ -10,6 +10,7 @@ class istopeDropdownFilters
     filtersnav__dropdown: '.filtersnav__dropdown'
     filter__children:     '.filtersnav__dropdown-items'
     filtersnav__item:     '.filtersnav__dropdown-item'
+    sizeDropdowns:        true
 
   constructor: (@element, options) ->
     @options = $.extend({}, @defaults, options)
@@ -21,11 +22,12 @@ class istopeDropdownFilters
     $("[data-filter='all'").prop('checked',true)
     $(".filtersnav__filter").addClass('active')
     @updateFilters()
-    @sizeDropdowns()
+    @sizeDropdowns() if @options.sizeDropdowns
 
 
   ## Size dropdown containers to be the same width as the top level button
   sizeDropdowns: ->
+
 
 
   setFilters: ->
@@ -39,11 +41,28 @@ class istopeDropdownFilters
           allValues.push(v1 + v2)
 
     $(@options.container).isotope({ filter: allValues.join(', ') })
+    @cleanUpFilters()
+
+
+  cleanUpFilters: ->
+    parents = $('.filtersnav__dropdown')
+    
+    for parent in parents
+      count = 0
+      children = $(parent).find('.filtersnav__filter')
+    
+      for child in children when $(child).data('filter') isnt 'all'
+        if $(child).hasClass('active')
+          count++
+
+      if count is 0
+        $(parent).find("[data-filter='all']").addClass('active').prop('checked',true)
 
 
 
   updateFilters: ->
     parents = $('.filtersnav__dropdown')
+
     for parent in parents
       parentName = $(parent).data('filter-group')
       children = $(parent).find('.filtersnav__filter')
@@ -52,6 +71,7 @@ class istopeDropdownFilters
         if $(child).data('filter') isnt 'all'
           if $(child).hasClass('active')
             @allFilters[parentName].push( $(child).data('filter') )
+    
     @setFilters()
     
 
@@ -70,13 +90,11 @@ class istopeDropdownFilters
     category = $(selection).closest('.filtersnav__dropdown').data('filter-group')
 
     if $filter is 'all'
-
       if isActive
         $(selection).prop('checked',true)
         return
 
-
-      else
+      else        
         for item in $filters
           if $(item).data('filter') isnt 'all'
             $(item).closest('.filtersnav__dropdown-item')
@@ -92,7 +110,9 @@ class istopeDropdownFilters
       @updateFilters()
       return
 
-      
+
+
+
     if $allFilter.hasClass('active')
       $filters.removeClass('active').prop('checked', false)      
       $(selection).addClass('active').prop('checked', true)
@@ -103,6 +123,12 @@ class istopeDropdownFilters
       else
         $(selection).removeClass('active')
         
+
+    
+
+    
+
+
     @allFilters[category] = @activeFilters
     @updateFilters()
 
