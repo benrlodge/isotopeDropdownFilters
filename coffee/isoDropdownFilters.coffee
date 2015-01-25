@@ -24,17 +24,14 @@ class istopeDropdownFilters
 
 
   setFilters: ->
-    console.log 'setting filters:'
-    console.log @activeFilters
+    console.log @allFilters
+    
+    # propsNum = Object.keys(@allFilters).length    
+    # for i in [0...propsNum]
+    #   console.log 'hey yo'
 
     
-    # $(selection).find(@options.filter__children).toggle()
-    # $(selection).closest('.filtersnav__dropdown')
-    #             .find(@options.selected__label).text($(selection).text())
-
-    # filterValue = $(selection).find('a').data('filter')
-
-    # # $container.isotope filter: filterValue
+    
     # $(@options.container).isotope({ filter: filterValue })
 
 
@@ -43,50 +40,54 @@ class istopeDropdownFilters
 
   ## Set active label and filter
   filterChange: (selection) ->
-   
+
+    selectionStatus = $(selection).is(':checked')
     @activeFilters = []
     isActive = $(selection).hasClass('active')
     $filter = $(selection).data('filter')
     $parentFilter = $(selection).closest(@options.filter__children)
+    $allFilter = $parentFilter.find("[data-filter='all']")
     $filters = $parentFilter.find('.filtersnav__filter')
+    category = $(selection).closest('.filtersnav__dropdown').attr('id')
 
     if $filter is 'all'
-            
+
       if isActive
         $(selection).removeClass('active')
         for item in $filters
-          $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false);
+          $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).removeClass('active')
         @activeFilters = []
 
       else
-        $(selection).addClass('active')
         for item in $filters
-          $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', true);
           if $(item).data('filter') isnt 'all'
+            $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).addClass('active')
             @activeFilters.push $(item).data('filter')
-        
+        $(selection).addClass('active')
+
+      @allFilters[category] = @activeFilters
       @setFilters()
       return
       
+    if $allFilter.hasClass('active')
+      console.log 'all filter is active'
+      $filters.removeClass('active').prop('checked', false)      
+      $(selection).addClass('active').prop('checked', true)
 
-    ## check if all is selected, remove active state if so
-    for filter in $filters
-      if $(filter).attr('data-filter') is 'all' and $(filter).hasClass 'active'
-
-        $("[data-filter='all']").removeClass('active').prop('checked', false)
-      
-
-    if $(selection).prop('checked')
-      $(selection).addClass('active')
-    
     else
-      $(selection).removeClass('active')
+      if selectionStatus
+        $(selection).addClass('active')
+      else
+        $(selection).removeClass('active')
+        
 
+    ## Store filters
     for filter in $filters
       if $(filter).hasClass('active')
         @activeFilters.push $(filter).data('filter')
-
       
+
+    @allFilters[category] = @activeFilters
     @setFilters()
 
 

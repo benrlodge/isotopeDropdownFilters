@@ -27,55 +27,59 @@
     istopeDropdownFilters.prototype.sizeDropdowns = function() {};
 
     istopeDropdownFilters.prototype.setFilters = function() {
-      console.log('setting filters:');
-      return console.log(this.activeFilters);
+      return console.log(this.allFilters);
     };
 
     istopeDropdownFilters.prototype.filterChange = function(selection) {
-      var $filter, $filters, $parentFilter, filter, isActive, item, _i, _j, _k, _l, _len, _len1, _len2, _len3;
+      var $allFilter, $filter, $filters, $parentFilter, category, filter, isActive, item, selectionStatus, _i, _j, _k, _len, _len1, _len2;
+      selectionStatus = $(selection).is(':checked');
       this.activeFilters = [];
       isActive = $(selection).hasClass('active');
       $filter = $(selection).data('filter');
       $parentFilter = $(selection).closest(this.options.filter__children);
+      $allFilter = $parentFilter.find("[data-filter='all']");
       $filters = $parentFilter.find('.filtersnav__filter');
+      category = $(selection).closest('.filtersnav__dropdown').attr('id');
       if ($filter === 'all') {
         if (isActive) {
           $(selection).removeClass('active');
           for (_i = 0, _len = $filters.length; _i < _len; _i++) {
             item = $filters[_i];
-            $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false);
+            $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).removeClass('active');
           }
           this.activeFilters = [];
         } else {
-          $(selection).addClass('active');
           for (_j = 0, _len1 = $filters.length; _j < _len1; _j++) {
             item = $filters[_j];
-            $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', true);
             if ($(item).data('filter') !== 'all') {
+              $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).addClass('active');
               this.activeFilters.push($(item).data('filter'));
             }
           }
+          $(selection).addClass('active');
         }
+        this.allFilters[category] = this.activeFilters;
         this.setFilters();
         return;
       }
-      for (_k = 0, _len2 = $filters.length; _k < _len2; _k++) {
-        filter = $filters[_k];
-        if ($(filter).attr('data-filter') === 'all' && $(filter).hasClass('active')) {
-          $("[data-filter='all']").removeClass('active').prop('checked', false);
+      if ($allFilter.hasClass('active')) {
+        console.log('all filter is active');
+        $filters.removeClass('active').prop('checked', false);
+        $(selection).addClass('active').prop('checked', true);
+      } else {
+        if (selectionStatus) {
+          $(selection).addClass('active');
+        } else {
+          $(selection).removeClass('active');
         }
       }
-      if ($(selection).prop('checked')) {
-        $(selection).addClass('active');
-      } else {
-        $(selection).removeClass('active');
-      }
-      for (_l = 0, _len3 = $filters.length; _l < _len3; _l++) {
-        filter = $filters[_l];
+      for (_k = 0, _len2 = $filters.length; _k < _len2; _k++) {
+        filter = $filters[_k];
         if ($(filter).hasClass('active')) {
           this.activeFilters.push($(filter).data('filter'));
         }
       }
+      this.allFilters[category] = this.activeFilters;
       return this.setFilters();
     };
 
