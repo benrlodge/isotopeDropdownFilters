@@ -15,7 +15,14 @@ class istopeDropdownFilters
   constructor: (@element, options) ->
     @options = $.extend({}, @defaults, options)
     @allFilters = {}
+    @init()
     @events()
+    
+
+  init: ->
+    $("[data-filter='all'").prop('checked',true)
+    $(".filtersnav__filter").addClass('active')
+    @updateFilters()
 
 
   ## Size dropdown containers to be the same width as the top level button
@@ -24,32 +31,38 @@ class istopeDropdownFilters
 
 
   setFilters: ->
-    console.log @allFilters
-    allF = @allFilters
-
-    allGroups = Object.keys(allF).map (key) -> allF[key]
-    # allGroups = for cat, values of @allFilters
-    #    values
-
+    allGroups = Object.keys(@allFilters).map (key) => @allFilters[key]    
     allValues = []
+
     allGroups.forEach (group, i) ->
-        otherValues = Array.prototype.concat.apply [], allGroups.slice(i + 1)
-        group.forEach (v1) -> otherValues.forEach (v2) -> allValues.push(v1 + v2)
+      otherValues = Array.prototype.concat.apply [], allGroups.slice(i + 1)  
+      group.forEach (v1) -> 
+        otherValues.forEach (v2) -> 
+          allValues.push(v1 + v2)
 
-    
     all = allValues.join(', ')
-    console.log all
-
     $(@options.container).isotope({ filter: all })
 
 
+
+  updateFilters: ->
+    parents = $('.filtersnav__dropdown')
+    for parent in parents
+      parentName = $(parent).data('filter-group')
+      children = $(parent).find('.filtersnav__filter')
+      @allFilters[parentName] = []
+      for child in children
+        if $(child).data('filter') isnt 'all'
+          if $(child).hasClass('active')
+            @allFilters[parentName].push( $(child).data('filter') )
+    @setFilters()
+    
 
 
 
 
   ## Set active label and filter
   filterChange: (selection) ->
-
     selectionStatus = $(selection).is(':checked')
     @activeFilters = []
     isActive = $(selection).hasClass('active')
@@ -60,7 +73,6 @@ class istopeDropdownFilters
     category = $(selection).closest('.filtersnav__dropdown').data('filter-group')
 
     if $filter is 'all'
-
       if isActive
         $(selection).removeClass('active')
         for item in $filters
@@ -75,7 +87,7 @@ class istopeDropdownFilters
         $(selection).addClass('active')
 
       @allFilters[category] = @activeFilters
-      @setFilters()
+      @updateFilters()
       return
       
     if $allFilter.hasClass('active')
@@ -88,15 +100,8 @@ class istopeDropdownFilters
       else
         $(selection).removeClass('active')
         
-
-    ## Store filters
-    for filter in $filters
-      if $(filter).hasClass('active')
-        @activeFilters.push $(filter).data('filter')
-      
-
     @allFilters[category] = @activeFilters
-    @setFilters()
+    @updateFilters()
 
 
 

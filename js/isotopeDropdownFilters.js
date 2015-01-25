@@ -21,18 +21,25 @@
       this.element = element;
       this.options = $.extend({}, this.defaults, options);
       this.allFilters = {};
+      this.init();
       this.events();
     }
+
+    istopeDropdownFilters.prototype.init = function() {
+      $("[data-filter='all'").prop('checked', true);
+      $(".filtersnav__filter").addClass('active');
+      return this.updateFilters();
+    };
 
     istopeDropdownFilters.prototype.sizeDropdowns = function() {};
 
     istopeDropdownFilters.prototype.setFilters = function() {
-      var all, allF, allGroups, allValues;
-      console.log(this.allFilters);
-      allF = this.allFilters;
-      allGroups = Object.keys(allF).map(function(key) {
-        return allF[key];
-      });
+      var all, allGroups, allValues;
+      allGroups = Object.keys(this.allFilters).map((function(_this) {
+        return function(key) {
+          return _this.allFilters[key];
+        };
+      })(this));
       allValues = [];
       allGroups.forEach(function(group, i) {
         var otherValues;
@@ -44,14 +51,33 @@
         });
       });
       all = allValues.join(', ');
-      console.log(all);
       return $(this.options.container).isotope({
         filter: all
       });
     };
 
+    istopeDropdownFilters.prototype.updateFilters = function() {
+      var child, children, parent, parentName, parents, _i, _j, _len, _len1;
+      parents = $('.filtersnav__dropdown');
+      for (_i = 0, _len = parents.length; _i < _len; _i++) {
+        parent = parents[_i];
+        parentName = $(parent).data('filter-group');
+        children = $(parent).find('.filtersnav__filter');
+        this.allFilters[parentName] = [];
+        for (_j = 0, _len1 = children.length; _j < _len1; _j++) {
+          child = children[_j];
+          if ($(child).data('filter') !== 'all') {
+            if ($(child).hasClass('active')) {
+              this.allFilters[parentName].push($(child).data('filter'));
+            }
+          }
+        }
+      }
+      return this.setFilters();
+    };
+
     istopeDropdownFilters.prototype.filterChange = function(selection) {
-      var $allFilter, $filter, $filters, $parentFilter, category, filter, isActive, item, selectionStatus, _i, _j, _k, _len, _len1, _len2;
+      var $allFilter, $filter, $filters, $parentFilter, category, isActive, item, selectionStatus, _i, _j, _len, _len1;
       selectionStatus = $(selection).is(':checked');
       this.activeFilters = [];
       isActive = $(selection).hasClass('active');
@@ -79,7 +105,7 @@
           $(selection).addClass('active');
         }
         this.allFilters[category] = this.activeFilters;
-        this.setFilters();
+        this.updateFilters();
         return;
       }
       if ($allFilter.hasClass('active')) {
@@ -92,14 +118,8 @@
           $(selection).removeClass('active');
         }
       }
-      for (_k = 0, _len2 = $filters.length; _k < _len2; _k++) {
-        filter = $filters[_k];
-        if ($(filter).hasClass('active')) {
-          this.activeFilters.push($(filter).data('filter'));
-        }
-      }
       this.allFilters[category] = this.activeFilters;
-      return this.setFilters();
+      return this.updateFilters();
     };
 
     istopeDropdownFilters.prototype.events = function() {
