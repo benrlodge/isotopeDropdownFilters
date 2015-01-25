@@ -27,7 +27,7 @@
 
         <ul class="filtersnav">
           
-          <li id='category' class="filtersnav__dropdown">
+          <li data-filter-group='category' class="filtersnav__dropdown">
             <span>Category: </span>
             <span class='selected-label'>All</span> <i class="icn icn-dropdown-arrow"></i></a>
             
@@ -44,12 +44,16 @@
                 <input id='chunkybacon' class='filtersnav__filter' type='checkbox' data-filter='.chunky-bacon'>
                 <label for='chunkybacon'> Chunky Bacon </label>
               </li>
+              <li class='filtersnav__dropdown-item'>
+                <input id='unicorns' class='filtersnav__filter' type='checkbox' data-filter='.unicorns'>
+                <label for='unicorns'> Unicorns </label>
+              </li>
 
             </ul>
           </li>
 
  
-          <li id="price" class="filtersnav__dropdown">
+          <li data-filter-group="price" class="filtersnav__dropdown">
             <span>Price: </span>
             <span class='selected-label'>All Prices</span> <i class="icn icn-dropdown-arrow"></i></a>
             

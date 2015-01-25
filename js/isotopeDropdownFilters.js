@@ -27,7 +27,27 @@
     istopeDropdownFilters.prototype.sizeDropdowns = function() {};
 
     istopeDropdownFilters.prototype.setFilters = function() {
-      return console.log(this.allFilters);
+      var all, allF, allGroups, allValues;
+      console.log(this.allFilters);
+      allF = this.allFilters;
+      allGroups = Object.keys(allF).map(function(key) {
+        return allF[key];
+      });
+      allValues = [];
+      allGroups.forEach(function(group, i) {
+        var otherValues;
+        otherValues = Array.prototype.concat.apply([], allGroups.slice(i + 1));
+        return group.forEach(function(v1) {
+          return otherValues.forEach(function(v2) {
+            return allValues.push(v1 + v2);
+          });
+        });
+      });
+      all = allValues.join(', ');
+      console.log(all);
+      return $(this.options.container).isotope({
+        filter: all
+      });
     };
 
     istopeDropdownFilters.prototype.filterChange = function(selection) {
@@ -39,7 +59,7 @@
       $parentFilter = $(selection).closest(this.options.filter__children);
       $allFilter = $parentFilter.find("[data-filter='all']");
       $filters = $parentFilter.find('.filtersnav__filter');
-      category = $(selection).closest('.filtersnav__dropdown').attr('id');
+      category = $(selection).closest('.filtersnav__dropdown').data('filter-group');
       if ($filter === 'all') {
         if (isActive) {
           $(selection).removeClass('active');
@@ -63,7 +83,6 @@
         return;
       }
       if ($allFilter.hasClass('active')) {
-        console.log('all filter is active');
         $filters.removeClass('active').prop('checked', false);
         $(selection).addClass('active').prop('checked', true);
       } else {

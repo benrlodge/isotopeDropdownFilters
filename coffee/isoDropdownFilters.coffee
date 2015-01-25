@@ -25,14 +25,23 @@ class istopeDropdownFilters
 
   setFilters: ->
     console.log @allFilters
-    
-    # propsNum = Object.keys(@allFilters).length    
-    # for i in [0...propsNum]
-    #   console.log 'hey yo'
+    allF = @allFilters
+
+    allGroups = Object.keys(allF).map (key) -> allF[key]
+    # allGroups = for cat, values of @allFilters
+    #    values
+
+    allValues = []
+    allGroups.forEach (group, i) ->
+        otherValues = Array.prototype.concat.apply [], allGroups.slice(i + 1)
+        group.forEach (v1) -> otherValues.forEach (v2) -> allValues.push(v1 + v2)
 
     
-    
-    # $(@options.container).isotope({ filter: filterValue })
+    all = allValues.join(', ')
+    console.log all
+
+    $(@options.container).isotope({ filter: all })
+
 
 
 
@@ -48,7 +57,7 @@ class istopeDropdownFilters
     $parentFilter = $(selection).closest(@options.filter__children)
     $allFilter = $parentFilter.find("[data-filter='all']")
     $filters = $parentFilter.find('.filtersnav__filter')
-    category = $(selection).closest('.filtersnav__dropdown').attr('id')
+    category = $(selection).closest('.filtersnav__dropdown').data('filter-group')
 
     if $filter is 'all'
 
@@ -70,7 +79,6 @@ class istopeDropdownFilters
       return
       
     if $allFilter.hasClass('active')
-      console.log 'all filter is active'
       $filters.removeClass('active').prop('checked', false)      
       $(selection).addClass('active').prop('checked', true)
 
