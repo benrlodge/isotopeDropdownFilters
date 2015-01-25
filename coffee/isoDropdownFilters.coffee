@@ -5,12 +5,11 @@ $.fn.istopeDropdownFilters = (pluginOptions) ->
 
 class istopeDropdownFilters
   defaults:
-    container: '.item-container'
-    filtersnav__filter: '.filtersnav__filter'
+    container:            '.item-container'
+    filtersnav__filter:   '.filtersnav__filter'
     filtersnav__dropdown: '.filtersnav__dropdown'
-    filter__children:'.filtersnav__dropdown-items'
-    filtersnav__item: '.filtersnav__dropdown-item'
-    selected__label: '.selected-label'
+    filter__children:     '.filtersnav__dropdown-items'
+    filtersnav__item:     '.filtersnav__dropdown-item'
 
   constructor: (@element, options) ->
     @options = $.extend({}, @defaults, options)
@@ -18,16 +17,15 @@ class istopeDropdownFilters
     @init()
     @events()
     
-
   init: ->
     $("[data-filter='all'").prop('checked',true)
     $(".filtersnav__filter").addClass('active')
     @updateFilters()
+    @sizeDropdowns()
 
 
   ## Size dropdown containers to be the same width as the top level button
   sizeDropdowns: ->
-
 
 
   setFilters: ->
@@ -40,8 +38,7 @@ class istopeDropdownFilters
         otherValues.forEach (v2) -> 
           allValues.push(v1 + v2)
 
-    all = allValues.join(', ')
-    $(@options.container).isotope({ filter: all })
+    $(@options.container).isotope({ filter: allValues.join(', ') })
 
 
 
@@ -73,22 +70,28 @@ class istopeDropdownFilters
     category = $(selection).closest('.filtersnav__dropdown').data('filter-group')
 
     if $filter is 'all'
+
       if isActive
-        $(selection).removeClass('active')
-        for item in $filters
-          $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).removeClass('active')
-        @activeFilters = []
+        $(selection).prop('checked',true)
+        return
+
 
       else
         for item in $filters
           if $(item).data('filter') isnt 'all'
-            $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).addClass('active')
+            $(item).closest('.filtersnav__dropdown-item')
+                   .find('input')
+                   .prop('checked', false)
+                   .addClass('active')
+
             @activeFilters.push $(item).data('filter')
+        
         $(selection).addClass('active')
 
       @allFilters[category] = @activeFilters
       @updateFilters()
       return
+
       
     if $allFilter.hasClass('active')
       $filters.removeClass('active').prop('checked', false)      

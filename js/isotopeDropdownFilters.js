@@ -13,8 +13,7 @@
       filtersnav__filter: '.filtersnav__filter',
       filtersnav__dropdown: '.filtersnav__dropdown',
       filter__children: '.filtersnav__dropdown-items',
-      filtersnav__item: '.filtersnav__dropdown-item',
-      selected__label: '.selected-label'
+      filtersnav__item: '.filtersnav__dropdown-item'
     };
 
     function istopeDropdownFilters(element, options) {
@@ -28,13 +27,14 @@
     istopeDropdownFilters.prototype.init = function() {
       $("[data-filter='all'").prop('checked', true);
       $(".filtersnav__filter").addClass('active');
-      return this.updateFilters();
+      this.updateFilters();
+      return this.sizeDropdowns();
     };
 
     istopeDropdownFilters.prototype.sizeDropdowns = function() {};
 
     istopeDropdownFilters.prototype.setFilters = function() {
-      var all, allGroups, allValues;
+      var allGroups, allValues;
       allGroups = Object.keys(this.allFilters).map((function(_this) {
         return function(key) {
           return _this.allFilters[key];
@@ -50,9 +50,8 @@
           });
         });
       });
-      all = allValues.join(', ');
       return $(this.options.container).isotope({
-        filter: all
+        filter: allValues.join(', ')
       });
     };
 
@@ -77,7 +76,7 @@
     };
 
     istopeDropdownFilters.prototype.filterChange = function(selection) {
-      var $allFilter, $filter, $filters, $parentFilter, category, isActive, item, selectionStatus, _i, _j, _len, _len1;
+      var $allFilter, $filter, $filters, $parentFilter, category, isActive, item, selectionStatus, _i, _len;
       selectionStatus = $(selection).is(':checked');
       this.activeFilters = [];
       isActive = $(selection).hasClass('active');
@@ -88,15 +87,11 @@
       category = $(selection).closest('.filtersnav__dropdown').data('filter-group');
       if ($filter === 'all') {
         if (isActive) {
-          $(selection).removeClass('active');
+          $(selection).prop('checked', true);
+          return;
+        } else {
           for (_i = 0, _len = $filters.length; _i < _len; _i++) {
             item = $filters[_i];
-            $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).removeClass('active');
-          }
-          this.activeFilters = [];
-        } else {
-          for (_j = 0, _len1 = $filters.length; _j < _len1; _j++) {
-            item = $filters[_j];
             if ($(item).data('filter') !== 'all') {
               $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).addClass('active');
               this.activeFilters.push($(item).data('filter'));
