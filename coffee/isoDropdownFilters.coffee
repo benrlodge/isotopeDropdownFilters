@@ -29,7 +29,7 @@ class istopeDropdownFilters
   sizeDropdowns: ->
 
 
-
+  ## Prepare filters for isotope
   setFilters: ->
     allGroups = Object.keys(@allFilters).map (key) => @allFilters[key]    
     allValues = []
@@ -43,6 +43,11 @@ class istopeDropdownFilters
     $(@options.container).isotope({ filter: allValues.join(', ') })
     @cleanUpFilters()
 
+
+  ## Right now this just checks the 'all' button
+  ## if no options are checked. Eventually I want
+  ## to clean this up and put in the 
+  ## filterChange or updateFilters functions
 
   cleanUpFilters: ->
     parents = $('.filtersnav__dropdown')
@@ -60,6 +65,7 @@ class istopeDropdownFilters
 
 
 
+  ## Adds active filters to the @allFilters object
   updateFilters: ->
     parents = $('.filtersnav__dropdown')
 
@@ -78,7 +84,7 @@ class istopeDropdownFilters
 
 
 
-  ## Set active label and filter
+  ## Sets active label and filter in DOM
   filterChange: (selection) ->
     selectionStatus = $(selection).is(':checked')
     @activeFilters = []
@@ -107,8 +113,6 @@ class istopeDropdownFilters
       @allFilters[category] = @activeFilters
       @updateFilters()
       return
-
-
 
 
     if $allFilter.hasClass('active')
