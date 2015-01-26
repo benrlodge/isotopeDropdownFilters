@@ -4,7 +4,7 @@
 
 To demo:
 
-1. Clone this repo
-2. NPM install and Bower install
-3. Run Grunt
-4. Load up localhost:4567
+1. Clone this repo: git clone https://github.com/benrlodge/isotopeDropdownFilters.git
+2. Install NPM and Bower dependencies: npm install && bower install
+3. run grunt: $ grunt
+4. Open browser at localhost:4567
