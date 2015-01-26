@@ -31,19 +31,57 @@ class istopeDropdownFilters
 
   ## Prepare filters for isotope
   setFilters: ->
-    allGroups = Object.keys(@allFilters).map (key) => @allFilters[key]    
-    allValues = []
+    
+    i = 0
+    comboFilters = []
+    message = []
+    isoFilters = ''
 
-    allGroups.forEach (group, i) ->
-      otherValues = Array.prototype.concat.apply [], allGroups.slice(i + 1)  
-      group.forEach (v1) -> 
-        otherValues.forEach (v2) -> 
-          allValues.push(v1 + v2)
+    for prop of @allFilters
+      if prop == '' || undefined || null
+        continue
+      
+      message.push @allFilters[prop].join(" ")
+      filterGroup = @allFilters[prop]
+      
+      # skip to next filter group if it doesn't have any values
+      continue unless filterGroup.length
+      
+      if i is 0    
+        # copy to new array
+        comboFilters = filterGroup.slice(0)
+      
+      else
+        # copy to fresh array if new data type is chosen
+        filterSelectors = []
+        groupCombo = comboFilters.slice(0) # [ A, B ]
+        
+        # merge filter Groups
+        k = 0
+        len3 = filterGroup.length
 
-    $(@options.container).isotope({ filter: allValues.join(', ') })
+        while k < len3
+          j = 0
+          len2 = groupCombo.length
+
+          while j < len2
+            filterSelectors.push groupCombo[j] + filterGroup[k] # [ 1, 2 ]
+            j++
+          k++
+        
+        # apply filter selectors to combo filters for next group
+        comboFilters = filterSelectors
+      i++
+
+    isoFilters = comboFilters.join(", ")
+    $(@options.container).isotope({ filter: isoFilters })
     @cleanUpFilters()
-
     console.log @allFilters
+
+
+
+
+
 
 
 
@@ -100,10 +138,8 @@ class istopeDropdownFilters
     category = $(selection).closest('.filtersnav__dropdown').data('filter-group')
 
     if $filter is 'all'
-      console.log 'ALL FILTER'
 
       if isActive
-        console.log 'is active'
         $(selection).prop('checked',true)
         return
 

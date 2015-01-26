@@ -17,6 +17,7 @@ cf:after{
 }
 
 
+
 /* Filters Navigation */
 
 .filtersnav{
@@ -136,4 +137,15 @@ cf:after{
 	background-size: cover;
 	background-position: center center;
 
+}
+
+
+.red{
+	border: red 1px solid;
+}
+.blue{
+	border: blue 1px solid;
+}
+.green{
+	border: green 1px solid;
 }

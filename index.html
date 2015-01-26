@@ -22,8 +22,6 @@
       
       <hr>
   
-                
-
 
         <ul class="filtersnav">
           
@@ -54,7 +52,6 @@
  
           <li data-filter-group="price" class="filtersnav__dropdown">
             <span>Price</span><i class="icn icn-dropdown-arrow"></i></a>
-            
             <ul class="filtersnav__dropdown-items">
               <li class='filtersnav__dropdown-item'>
                 <input id='all-prices' class='filtersnav__filter active' type='checkbox' data-filter='all'>
@@ -68,7 +65,28 @@
                 <input id='price-paid' class='filtersnav__filter' type='checkbox' data-filter='.paid'>
                 <label for='price-paid'> Paid </label>
               </li>
-             
+            </ul>
+          </li>
+
+          <li data-filter-group="color" class="filtersnav__dropdown">
+            <span>Color</span><i class="icn icn-dropdown-arrow"></i></a>
+            <ul class="filtersnav__dropdown-items">
+              <li class='filtersnav__dropdown-item'>
+                <input id='all-colors' class='filtersnav__filter active' type='checkbox' data-filter='all'>
+                <label for='all-colors'>All</label>
+              </li>
+              <li class='filtersnav__dropdown-item'>
+                <input id='color-blue' class='filtersnav__filter' type='checkbox' data-filter='.blue'>
+                <label for='color-blue'>Blue</label>
+              </li>
+              <li class='filtersnav__dropdown-item'>
+                <input id='color-green' class='filtersnav__filter' type='checkbox' data-filter='.green'>
+                <label for='color-green'> Green </label>
+              </li>
+              <li class='filtersnav__dropdown-item'>
+                <input id='color-red' class='filtersnav__filter' type='checkbox' data-filter='.red'>
+                <label for='color-red'> Red </label>
+              </li>
             </ul>
           </li>
 
@@ -81,16 +99,16 @@
   
 
     <div class='item-container'>
-      <div class='item bacon free'>
+      <div class='item bacon free blue'>
         Bacon (free)
       </div>
-      <div class='item chunky-bacon paid'>
+      <div class='item chunky-bacon paid green'>
         Chunky Bacon <br>($10 a slice)
       </div>
-      <div class='item unicorns free'>
+      <div class='item unicorns free green'>
         Normal Unicorns <br> (free)
       </div>
-      <div class='item unicorns paid'>
+      <div class='item unicorns paid red'>
         Special Unicorns <br> ($5 each)
       </div>
     </div>

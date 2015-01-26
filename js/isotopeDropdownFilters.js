@@ -37,24 +37,43 @@
     istopeDropdownFilters.prototype.sizeDropdowns = function() {};
 
     istopeDropdownFilters.prototype.setFilters = function() {
-      var allGroups, allValues;
-      allGroups = Object.keys(this.allFilters).map((function(_this) {
-        return function(key) {
-          return _this.allFilters[key];
-        };
-      })(this));
-      allValues = [];
-      allGroups.forEach(function(group, i) {
-        var otherValues;
-        otherValues = Array.prototype.concat.apply([], allGroups.slice(i + 1));
-        return group.forEach(function(v1) {
-          return otherValues.forEach(function(v2) {
-            return allValues.push(v1 + v2);
-          });
-        });
-      });
+      var comboFilters, filterGroup, filterSelectors, groupCombo, i, isoFilters, j, k, len2, len3, message, prop;
+      i = 0;
+      comboFilters = [];
+      message = [];
+      isoFilters = '';
+      for (prop in this.allFilters) {
+        if (prop === '' || void 0 || null) {
+          continue;
+        }
+        message.push(this.allFilters[prop].join(" "));
+        filterGroup = this.allFilters[prop];
+        if (!filterGroup.length) {
+          continue;
+        }
+        if (i === 0) {
+          comboFilters = filterGroup.slice(0);
+        } else {
+          filterSelectors = [];
+          groupCombo = comboFilters.slice(0);
+          k = 0;
+          len3 = filterGroup.length;
+          while (k < len3) {
+            j = 0;
+            len2 = groupCombo.length;
+            while (j < len2) {
+              filterSelectors.push(groupCombo[j] + filterGroup[k]);
+              j++;
+            }
+            k++;
+          }
+          comboFilters = filterSelectors;
+        }
+        i++;
+      }
+      isoFilters = comboFilters.join(", ");
       $(this.options.container).isotope({
-        filter: allValues.join(', ')
+        filter: isoFilters
       });
       this.cleanUpFilters();
       return console.log(this.allFilters);
@@ -116,9 +135,7 @@
       $filters = $parentFilter.find('.filtersnav__filter');
       category = $(selection).closest('.filtersnav__dropdown').data('filter-group');
       if ($filter === 'all') {
-        console.log('ALL FILTER');
         if (isActive) {
-          console.log('is active');
           $(selection).prop('checked', true);
           return;
         } else {
