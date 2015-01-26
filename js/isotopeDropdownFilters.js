@@ -56,7 +56,8 @@
       $(this.options.container).isotope({
         filter: allValues.join(', ')
       });
-      return this.cleanUpFilters();
+      this.cleanUpFilters();
+      return console.log(this.allFilters);
     };
 
     istopeDropdownFilters.prototype.cleanUpFilters = function() {
@@ -115,16 +116,19 @@
       $filters = $parentFilter.find('.filtersnav__filter');
       category = $(selection).closest('.filtersnav__dropdown').data('filter-group');
       if ($filter === 'all') {
+        console.log('ALL FILTER');
         if (isActive) {
+          console.log('is active');
           $(selection).prop('checked', true);
           return;
         } else {
           for (_i = 0, _len = $filters.length; _i < _len; _i++) {
             item = $filters[_i];
-            if ($(item).data('filter') !== 'all') {
-              $(item).closest('.filtersnav__dropdown-item').find('input').checked(false);
-              this.activeFilters.push($(item).data('filter'));
+            if (!($(item).data('filter') !== 'all')) {
+              continue;
             }
+            $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked', false).addClass('active');
+            this.activeFilters.push($(item).data('filter'));
           }
           $(selection).addClass('active');
         }

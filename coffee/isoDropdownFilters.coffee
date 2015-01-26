@@ -43,8 +43,12 @@ class istopeDropdownFilters
     $(@options.container).isotope({ filter: allValues.join(', ') })
     @cleanUpFilters()
 
+    console.log @allFilters
 
-  ## Right now this just checks the 'all' button
+
+
+
+  ## Right now this method just checks the 'all' button
   ## if no options are checked. Eventually I want
   ## to clean this up and put in the 
   ## filterChange or updateFilters functions
@@ -84,7 +88,7 @@ class istopeDropdownFilters
 
 
 
-  ## Sets active label and filter in DOM
+  ## Sets active label and checkbox status in the DOM
   filterChange: (selection) ->
     selectionStatus = $(selection).is(':checked')
     @activeFilters = []
@@ -96,23 +100,24 @@ class istopeDropdownFilters
     category = $(selection).closest('.filtersnav__dropdown').data('filter-group')
 
     if $filter is 'all'
+      console.log 'ALL FILTER'
+
       if isActive
+        console.log 'is active'
         $(selection).prop('checked',true)
         return
 
       else        
-        for item in $filters
-          if $(item).data('filter') isnt 'all'
-            $(item).closest('.filtersnav__dropdown-item')
-                   .find('input')
-                   .checked(false)
-
+        for item in $filters when $(item).data('filter') isnt 'all'
+            $(item).closest('.filtersnav__dropdown-item').find('input').prop('checked',false).addClass('active')
             @activeFilters.push $(item).data('filter')
         $(selection).addClass('active')
 
       @allFilters[category] = @activeFilters
       @updateFilters()
       return
+
+
 
 
     if $allFilter.hasClass('active')
@@ -125,7 +130,6 @@ class istopeDropdownFilters
       else
         $(selection).removeClass('active')
         
-
     @allFilters[category] = @activeFilters
     @updateFilters()
 
@@ -143,6 +147,8 @@ class istopeDropdownFilters
       plugin.filterChange(@)
       
 
+
+## Helpers
 
 $.fn.checked = (status) ->
   if status
