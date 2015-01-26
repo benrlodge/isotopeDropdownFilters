@@ -8,7 +8,7 @@ a{
 	color: blue;
 }
 p{
-	color: 16px;
+	font-size: 18px;
 }
 code{
 	font-family: "Courier New", Courier, monospace;
@@ -22,6 +22,12 @@ pre{
 	color: #fff;
 	font-weight: 100;
 }
+.note{
+    background: #e9ffd9;
+    border: 1px solid #a6ca8a;
+    padding: 10px;
+    border-radius: 3px;
+}
 h1{
 	font-size: 40px;
 	letter-spacing: .02em;
@@ -29,6 +35,9 @@ h1{
 h1 span{
 	font-size: 22px;
 	letter-spacing: .06em;
+}
+h2{
+	font-weight: 300;
 }
 .item-container{
 	margin: 10px 0 50px 0;

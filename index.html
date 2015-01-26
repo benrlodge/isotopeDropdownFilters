@@ -18,7 +18,7 @@
 
     
     <h1> <img src='img/filter-icon.png'> isotopeDropdownFilters<span>.jquery.js</span></h1>
-    <p>Prepackaged dropdown filtering with the MetaFizzy Isotope Plugin</p>
+    <h2>Prepackaged dropdown filtering with the <a href="http://isotope.metafizzy.co/" target="_blank">MetaFizzy Isotope Plugin</a></h2>
       <nav class='main-nav'>
         <a href="#howtouse">How to Use</a>
         <a target="_blank" href="https://github.com/benrlodge/isotopeDropdownFilters">Fork on Github</a>
@@ -137,14 +137,14 @@
     <hr>
     <article>
       <h2 id="howtouse">How to use</h2>
-      <p>Note - If you haven't used the <a href="http://isotope.metafizzy.co/" target="_blank">MetaFizzy Isotope Plugin</a> yet, I would recommend doing that first. Once you understand how the plugin works.</p>
+      <p class='note'>Note: If you haven't used the <a href="http://isotope.metafizzy.co/" target="_blank">Metafizzy Isotope Plugin</a> yet, I would recommend playing with it first before using this plugin, given it's a hard dependency. </p>
 
       <p>Inspect the markup on this demo to replicate filter setup (look for the class named "filtersnav"). Modify if desired, but if so, be sure to update the default class names in the options (see below).</p>
       
       <p> In filter markup, for each filter (checkbox), in this demo named "filtersnav__filter", update the "data-filter" attribute to the name of the class you will use for the filtered items, then for each filtered item, add the class name for the corresponding data-filter (same as you would using the standard isotope plugin). </p>
 
       <p>Set the js up as you normally would using the 
-      <a href="http://isotope.metafizzy.co/" target="_blank">MetaFizzy Isotope Plugin</a>, 
+      <a href="http://isotope.metafizzy.co/" target="_blank">Metafizzy Isotope Plugin</a>, 
       then chain on ".isotopeDropdownFilters".
 
 
@@ -178,7 +178,6 @@
       filtersnav__item:     <span class='code-class'>'.filtersnav__dropdown-item'</span> // container of individual filter
       filtersnav__dropdown: <span class='code-class'>'.filtersnav__dropdown'</span> // filter group name
       filter__children:     <span class='code-class'>'.filtersnav__dropdown-items'</span> // parent of filter group
-      
     });
     
   &lt;/script&gt;
