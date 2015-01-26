@@ -56,7 +56,7 @@ class istopeDropdownFilters
           count++
 
       if count is 0
-        $(parent).find("[data-filter='all']").addClass('active').prop('checked',true)
+        $(parent).find("[data-filter='all']").checked(true)
 
 
 
@@ -99,11 +99,9 @@ class istopeDropdownFilters
           if $(item).data('filter') isnt 'all'
             $(item).closest('.filtersnav__dropdown-item')
                    .find('input')
-                   .prop('checked', false)
-                   .addClass('active')
+                   .checked(false)
 
             @activeFilters.push $(item).data('filter')
-        
         $(selection).addClass('active')
 
       @allFilters[category] = @activeFilters
@@ -114,8 +112,8 @@ class istopeDropdownFilters
 
 
     if $allFilter.hasClass('active')
-      $filters.removeClass('active').prop('checked', false)      
-      $(selection).addClass('active').prop('checked', true)
+      $filters.checked(false)
+      $(selection).checked(true)
 
     else
       if selectionStatus
@@ -123,11 +121,6 @@ class istopeDropdownFilters
       else
         $(selection).removeClass('active')
         
-
-    
-
-    
-
 
     @allFilters[category] = @activeFilters
     @updateFilters()
@@ -147,6 +140,11 @@ class istopeDropdownFilters
       
 
 
+$.fn.checked = (status) ->
+  if status
+    this.addClass('active').prop('checked', true)
+  else
+    this.removeClass('active').prop('checked', false)
 
 
 
