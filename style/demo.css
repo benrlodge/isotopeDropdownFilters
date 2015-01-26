@@ -1,7 +1,38 @@
 *{
 	box-sizing: border-box;
 }
-
+article{
+	margin: 10px 0 50px 0;
+}
+a{
+	color: blue;
+}
+p{
+	color: 16px;
+}
+code{
+	font-family: "Courier New", Courier, monospace;
+}
+.code-class{
+	color: #76EE00;
+}
+pre{
+	font-size: 14px;
+	background: #333;
+	color: #fff;
+	font-weight: 100;
+}
+h1{
+	font-size: 40px;
+	letter-spacing: .02em;
+}
+h1 span{
+	font-size: 22px;
+	letter-spacing: .06em;
+}
+.item-container{
+	margin: 10px 0 50px 0;
+}
 .container{
 	max-width: 800px;
 	margin: 0 auto;
@@ -16,6 +47,13 @@ cf:after{
 	clear: both;
 }
 
+.main-nav{
+}
+.main-nav a{
+	color: blue;
+	display: inline-block;
+	margin: 0 10px 0 0;
+}
 
 
 /* Filters Navigation */
@@ -125,10 +163,9 @@ cf:after{
 
 .item{
 	border: 1px solid #dadada;
-	padding: 10px;
-	width: 190px;
+	width: 150px;
 	height: 150px;
-	margin: 10px 10px 10px 0;
+	margin: 10px 10px 0 0
 }
 
 .img{
@@ -139,13 +176,3 @@ cf:after{
 
 }
 
-
-.red{
-	border: red 1px solid;
-}
-.blue{
-	border: blue 1px solid;
-}
-.green{
-	border: green 1px solid;
-}

@@ -1,14 +1,14 @@
 (function() {
-  var istopeDropdownFilters;
+  var isotopeDropdownFilters;
 
-  $.fn.istopeDropdownFilters = function(pluginOptions) {
+  $.fn.isotopeDropdownFilters = function(pluginOptions) {
     return this.each(function(i, element) {
-      return new istopeDropdownFilters($(element), pluginOptions);
+      return new isotopeDropdownFilters($(element), pluginOptions);
     });
   };
 
-  istopeDropdownFilters = (function() {
-    istopeDropdownFilters.prototype.defaults = {
+  isotopeDropdownFilters = (function() {
+    isotopeDropdownFilters.prototype.defaults = {
       container: '.item-container',
       filtersnav__filter: '.filtersnav__filter',
       filtersnav__dropdown: '.filtersnav__dropdown',
@@ -17,7 +17,7 @@
       sizeDropdowns: true
     };
 
-    function istopeDropdownFilters(element, options) {
+    function isotopeDropdownFilters(element, options) {
       this.element = element;
       this.options = $.extend({}, this.defaults, options);
       this.allFilters = {};
@@ -25,7 +25,7 @@
       this.events();
     }
 
-    istopeDropdownFilters.prototype.init = function() {
+    isotopeDropdownFilters.prototype.init = function() {
       $("[data-filter='all'").prop('checked', true);
       $(".filtersnav__filter").addClass('active');
       this.updateFilters();
@@ -34,9 +34,9 @@
       }
     };
 
-    istopeDropdownFilters.prototype.sizeDropdowns = function() {};
+    isotopeDropdownFilters.prototype.sizeDropdowns = function() {};
 
-    istopeDropdownFilters.prototype.setFilters = function() {
+    isotopeDropdownFilters.prototype.setFilters = function() {
       var comboFilters, filterGroup, filterSelectors, groupCombo, i, isoFilters, j, k, len2, len3, message, prop;
       i = 0;
       comboFilters = [];
@@ -72,6 +72,7 @@
         i++;
       }
       isoFilters = comboFilters.join(", ");
+      console.log(isoFilters);
       $(this.options.container).isotope({
         filter: isoFilters
       });
@@ -79,7 +80,7 @@
       return console.log(this.allFilters);
     };
 
-    istopeDropdownFilters.prototype.cleanUpFilters = function() {
+    isotopeDropdownFilters.prototype.cleanUpFilters = function() {
       var child, children, count, parent, parents, _i, _j, _len, _len1, _results;
       parents = $('.filtersnav__dropdown');
       _results = [];
@@ -104,7 +105,7 @@
       return _results;
     };
 
-    istopeDropdownFilters.prototype.updateFilters = function() {
+    isotopeDropdownFilters.prototype.updateFilters = function() {
       var child, children, parent, parentName, parents, _i, _j, _len, _len1;
       parents = $('.filtersnav__dropdown');
       for (_i = 0, _len = parents.length; _i < _len; _i++) {
@@ -124,7 +125,7 @@
       return this.setFilters();
     };
 
-    istopeDropdownFilters.prototype.filterChange = function(selection) {
+    isotopeDropdownFilters.prototype.filterChange = function(selection) {
       var $allFilter, $filter, $filters, $parentFilter, category, isActive, item, selectionStatus, _i, _len;
       selectionStatus = $(selection).is(':checked');
       this.activeFilters = [];
@@ -167,7 +168,7 @@
       return this.updateFilters();
     };
 
-    istopeDropdownFilters.prototype.events = function() {
+    isotopeDropdownFilters.prototype.events = function() {
       var plugin;
       plugin = this;
       $(this.options.filtersnav__dropdown).on('mouseenter mouseleave', function() {
@@ -178,7 +179,7 @@
       });
     };
 
-    return istopeDropdownFilters;
+    return isotopeDropdownFilters;
 
   })();
 

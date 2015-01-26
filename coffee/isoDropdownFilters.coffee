@@ -1,9 +1,9 @@
 
-$.fn.istopeDropdownFilters = (pluginOptions) ->
-  @each (i, element) -> new istopeDropdownFilters($(element), pluginOptions)
+$.fn.isotopeDropdownFilters = (pluginOptions) ->
+  @each (i, element) -> new isotopeDropdownFilters($(element), pluginOptions)
 
 
-class istopeDropdownFilters
+class isotopeDropdownFilters
   defaults:
     container:            '.item-container'
     filtersnav__filter:   '.filtersnav__filter'
@@ -47,8 +47,8 @@ class istopeDropdownFilters
       # skip to next filter group if it doesn't have any values
       continue unless filterGroup.length
       
+      # copy to new array
       if i is 0    
-        # copy to new array
         comboFilters = filterGroup.slice(0)
       
       else
@@ -73,7 +73,10 @@ class istopeDropdownFilters
         comboFilters = filterSelectors
       i++
 
+
     isoFilters = comboFilters.join(", ")
+    console.log isoFilters
+    
     $(@options.container).isotope({ filter: isoFilters })
     @cleanUpFilters()
     console.log @allFilters

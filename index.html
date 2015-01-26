@@ -17,16 +17,20 @@
     <div class='container'>
 
     
-    <h1>isoDropdownFilters.js</h1>
-    <p>Prepackaged dropdown filters using the MetaFizzy Isotope Plugin</p>
+    <h1> <img src='img/filter-icon.png'> isotopeDropdownFilters<span>.jquery.js</span></h1>
+    <p>Prepackaged dropdown filtering with the MetaFizzy Isotope Plugin</p>
+      <nav class='main-nav'>
+        <a href="#howtouse">How to Use</a>
+        <a target="_blank" href="https://github.com/benrlodge/isotopeDropdownFilters">Fork on Github</a>
+      </nav>
       
       <hr>
   
 
         <ul class="filtersnav">
           
-          <li data-filter-group='category' class="filtersnav__dropdown">
-            <span>Categories</span><i class="icn icn-dropdown-arrow"></i></a>
+          <li data-filter-group='animals' class="filtersnav__dropdown">
+            <span>Animals</span><i class="icn icn-dropdown-arrow"></i></a>
             
             <ul class="filtersnav__dropdown-items">
               <li class='filtersnav__dropdown-item'>
@@ -34,90 +38,154 @@
                 <label for='categories'>All</label>
               </li>
               <li class='filtersnav__dropdown-item'>
-                <input id='bacon' class='filtersnav__filter' type='checkbox' data-filter='.bacon'>
-                <label for='bacon'> Thin Bacon </label>
+                <input id='dogs' class='filtersnav__filter' type='checkbox' data-filter='.dog'>
+                <label for='dogs'> Dogs </label>
               </li>
               <li class='filtersnav__dropdown-item'>
-                <input id='chunkybacon' class='filtersnav__filter' type='checkbox' data-filter='.chunky-bacon'>
-                <label for='chunkybacon'> Chunky Bacon </label>
+                <input id='monkey' class='filtersnav__filter' type='checkbox' data-filter='.monkey'>
+                <label for='monkey'> Monkeys </label>
               </li>
               <li class='filtersnav__dropdown-item'>
-                <input id='unicorns' class='filtersnav__filter' type='checkbox' data-filter='.unicorns'>
-                <label for='unicorns'> Unicorns </label>
+                <input id='cats' class='filtersnav__filter' type='checkbox' data-filter='.cat'>
+                <label for='cats'> Cats </label>
+              </li>
+              <li class='filtersnav__dropdown-item'>
+                <input id='sloths' class='filtersnav__filter' type='checkbox' data-filter='.sloth'>
+                <label for='sloths'> Sloths </label>
               </li>
 
             </ul>
           </li>
 
  
-          <li data-filter-group="price" class="filtersnav__dropdown">
-            <span>Price</span><i class="icn icn-dropdown-arrow"></i></a>
+          <li data-filter-group="activity" class="filtersnav__dropdown">
+            <span>Activity</span><i class="icn icn-dropdown-arrow"></i></a>
             <ul class="filtersnav__dropdown-items">
               <li class='filtersnav__dropdown-item'>
-                <input id='all-prices' class='filtersnav__filter active' type='checkbox' data-filter='all'>
-                <label for='all-prices'>All</label>
+                <input id='all-activities' class='filtersnav__filter active' type='checkbox' data-filter='all'>
+                <label for='all-activities'>All</label>
               </li>
               <li class='filtersnav__dropdown-item'>
-                <input id='price-free' class='filtersnav__filter' type='checkbox' data-filter='.free'>
-                <label for='price-free'>Free</label>
+                <input id='karate' class='filtersnav__filter' type='checkbox' data-filter='.karate'>
+                <label for='karate'>Karate</label>
               </li>
               <li class='filtersnav__dropdown-item'>
-                <input id='price-paid' class='filtersnav__filter' type='checkbox' data-filter='.paid'>
-                <label for='price-paid'> Paid </label>
+                <input id='swing' class='filtersnav__filter' type='checkbox' data-filter='.swing'>
+                <label for='swing'> Swinging </label>
+              </li>
+              <li class='filtersnav__dropdown-item'>
+                <input id='chillin' class='filtersnav__filter' type='checkbox' data-filter='.chillin'>
+                <label for='chillin'> Chillin </label>
               </li>
             </ul>
           </li>
-
-          <li data-filter-group="color" class="filtersnav__dropdown">
-            <span>Color</span><i class="icn icn-dropdown-arrow"></i></a>
-            <ul class="filtersnav__dropdown-items">
-              <li class='filtersnav__dropdown-item'>
-                <input id='all-colors' class='filtersnav__filter active' type='checkbox' data-filter='all'>
-                <label for='all-colors'>All</label>
-              </li>
-              <li class='filtersnav__dropdown-item'>
-                <input id='color-blue' class='filtersnav__filter' type='checkbox' data-filter='.blue'>
-                <label for='color-blue'>Blue</label>
-              </li>
-              <li class='filtersnav__dropdown-item'>
-                <input id='color-green' class='filtersnav__filter' type='checkbox' data-filter='.green'>
-                <label for='color-green'> Green </label>
-              </li>
-              <li class='filtersnav__dropdown-item'>
-                <input id='color-red' class='filtersnav__filter' type='checkbox' data-filter='.red'>
-                <label for='color-red'> Red </label>
-              </li>
-            </ul>
-          </li>
-
-
-
-
         </ul>
 
 
   
-
     <div class='item-container'>
-      <div class='item bacon free blue'>
-        Bacon (free)
+      <div class='item dog swing'>
+        <img src="img/dogswing1.jpg">
       </div>
-      <div class='item chunky-bacon paid green'>
-        Chunky Bacon <br>($10 a slice)
+      <div class='item dog karate'>
+        <img src="img/dogkarate.jpeg">
       </div>
-      <div class='item unicorns free green'>
-        Normal Unicorns <br> (free)
+      <div class='item dog karate'>
+        <img src="img/dogkarate2.jpg">
       </div>
-      <div class='item unicorns paid red'>
-        Special Unicorns <br> ($5 each)
+      <div class='item monkey chillin'>
+        <img src="img/monkey1.jpg">
       </div>
+      <div class='item sloth chillin'>
+        <img src="img/slothchillin2.jpg">
+      </div>
+      <div class='item dog swing'>
+        <img src="img/dogswing2.jpg">
+      </div>
+      <div class='item monkey karate'>
+        <img src="img/monkey2.jpg">
+      </div>
+      <div class='item sloth chillin'>
+        <img src="img/slothchillin.jpg">
+      </div>
+      <div class='item monkey karate'>
+        <img src="img/monkey3.jpeg">
+      </div>
+      <div class='item dog swing'>
+        <img src="img/dogswing3.jpg">
+      </div>
+      <div class='item cat swing'>
+        <img src="img/catswing.jpg">
+      </div>
+      <div class='item sloth swing'>
+        <img src="img/slothswing.jpg">
+      </div>
+      <div class='item dog chillin'>
+        <img src="img/dogchillin.jpg">
+      </div>
+      <div class='item sloth chillin'>
+        <img src="img/slothbucket.jpeg">
+      </div>
+
     </div>
 
       
 
 
     
-  
+
+    <hr>
+    <article>
+      <h2 id="howtouse">How to use</h2>
+      <p>Note - If you haven't used the <a href="http://isotope.metafizzy.co/" target="_blank">MetaFizzy Isotope Plugin</a> yet, I would recommend doing that first. Once you understand how the plugin works.</p>
+
+      <p>Inspect the markup on this demo to replicate filter setup (look for the class named "filtersnav"). Modify if desired, but if so, be sure to update the default class names in the options (see below).</p>
+      
+      <p> In filter markup, for each filter (checkbox), in this demo named "filtersnav__filter", update the "data-filter" attribute to the name of the class you will use for the filtered items, then for each filtered item, add the class name for the corresponding data-filter (same as you would using the standard isotope plugin). </p>
+
+      <p>Set the js up as you normally would using the 
+      <a href="http://isotope.metafizzy.co/" target="_blank">MetaFizzy Isotope Plugin</a>, 
+      then chain on ".isotopeDropdownFilters".
+
+
+      </p>
+<pre><code>
+  &lt;script&gt;
+    $(document).ready(function(){
+      var $container = $('.item-container')
+      $container.isotope({
+        itemSelector: '.item',
+        layoutMode: 'fitRows' 
+      }).isotopeDropdownFilters();
+    })
+  &lt;/script&gt;
+
+</pre></code>
+
+    </article>
+
+
+    <article>
+      <h2>Options</h2>
+      <p>Reference the markup in this demo to better understand options.</p> 
+      <p>Most of the options reflect the markup of the filters.</p>
+<pre><code>
+  &lt;script&gt;
+   
+    isotopeDropdownFilters({
+      container:            <span class='code-class'>'.item-container'</span> // container of filtered items
+      filtersnav__filter:   <span class='code-class'>'.filtersnav__filter'</span> // individual filters (check boxes)
+      filtersnav__item:     <span class='code-class'>'.filtersnav__dropdown-item'</span> // container of individual filter
+      filtersnav__dropdown: <span class='code-class'>'.filtersnav__dropdown'</span> // filter group name
+      filter__children:     <span class='code-class'>'.filtersnav__dropdown-items'</span> // parent of filter group
+      
+    });
+    
+  &lt;/script&gt;
+
+</pre></code>
+
+    </article>
 
 
 
@@ -139,11 +207,9 @@
         $container.isotope({
           itemSelector: '.item',
           layoutMode: 'fitRows' 
-        }).istopeDropdownFilters();
+        }).isotopeDropdownFilters();
 
       })
-
-
 
     </script>
       
